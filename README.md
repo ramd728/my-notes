@@ -84,3 +84,20 @@ def assert_db_result(result, expected_result, cursor):
             actual = row_dict.get(k)
             assert actual == expected[k], f"Expected {k} = {expected[k]}, but got {actual}"
 
+
+
+if store_as:
+    columns = [desc[0].lower() for desc in cursor.description]
+    if isinstance(result, list):
+        if result:
+            # Only store the first row by default from fetchall()
+            row_dict = dict(zip(columns, result[0]))
+        else:
+            row_dict = {}
+    else:
+        row_dict = dict(zip(columns, result)) if result else {}
+
+    for col, val in row_dict.items():
+        context[f"{store_as}.{col}"] = str(val)
+
+

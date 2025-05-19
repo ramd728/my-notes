@@ -57,24 +57,28 @@ CREATE TABLE test_logs (
 
 
 
+import json
+
 def assert_db_result(result, expected_result, cursor):
-    import json
     if not result:
         raise AssertionError("No DB result returned")
-    expected = json.loads(expected_result)
+
+    # Normalize expected values to lowercase keys and string values
+    expected = {k.lower(): str(v) for k, v in json.loads(expected_result).items()}
     columns = [desc[0].lower() for desc in cursor.description]
 
     if isinstance(result, list):  # fetchall()
         matched = False
         for row in result:
-            row_dict = dict(zip(columns, row))
-            if all(str(row_dict.get(k)) == str(v) for k, v in expected.items()):
+            row_dict = {k.lower(): str(v) for k, v in zip(columns, row)}
+            if all(row_dict.get(k) == expected[k] for k in expected):
                 matched = True
                 break
         if not matched:
             raise AssertionError(f"Expected match not found in DB result set: {expected}")
     else:  # fetchone()
-        row_dict = dict(zip(columns, result))
-        for k, v in expected.items():
-            actual = str(row_dict.get(k))
-            assert actual == str(v), f"Expected {k} = {v}, but got {actual}"
+        row_dict = {k.lower(): str(v) for k, v in zip(columns, result)}
+        for k in expected:
+            actual = row_dict.get(k)
+            assert actual == expected[k], f"Expected {k} = {expected[k]}, but got {actual}"
+

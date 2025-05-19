@@ -31,6 +31,8 @@ CREATE TABLE test_steps (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE test_steps ADD COLUMN fetch_mode TEXT CHECK (fetch_mode IN ('one', 'all')) DEFAULT 'one';
+
 -- Test Results
 CREATE TABLE test_results (
     uuid TEXT PRIMARY KEY,

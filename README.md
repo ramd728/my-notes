@@ -155,3 +155,38 @@ You can pass the batch name as an environment variable:
 ENV=uat BATCH=SMOKE pytest
 
 
+
+This framework adopts a database-driven model for managing test cases and test steps. While many teams manually code test cases in files, our approach offers key enterprise advantages:
+
+✅ Why This Is the Right Architecture
+
+🔁 Scalable — Easily manage thousands of test cases (UI/API/DB) without bloated files.
+
+⚙️ Flexible Execution — Filter by batch, category, tag, priority, or owner — no code change required.
+
+📊 Central Visibility — Business, QA, and Developers can all view/edit/manage test cases outside code.
+
+🧩 Reusable Steps — Test actions (e.g. login, form submission) are parameterized and reused across cases.
+
+🧠 Smart Automation — Enables dashboards, analytics, failure tracking, tagging, and priority-based runs.
+
+🛡️ Addressing Concerns
+
+Concern
+
+Response
+
+“Isn’t it more complex than just writing Pytest files?”
+
+Yes at first — but vastly easier to scale and maintain long term.
+
+“What if step logic is too custom for DB?”
+
+Use a hybrid approach — inject references to modular Python logic when needed.
+
+“Will others be able to write test cases?”
+
+Absolutely. With a UI or admin form, anyone can define steps without touching Python code.
+
+This approach turns your framework into a test platform — not just a script repository.
+

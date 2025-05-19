@@ -131,4 +131,13 @@ CREATE TABLE test_case_batches (
     PRIMARY KEY (test_case_id, batch_id)
 );
 
+SELECT tc.id, tc.name
+FROM test_cases tc
+JOIN test_case_batches cb ON tc.id = cb.test_case_id
+JOIN test_batches b ON cb.batch_id = b.id
+WHERE b.name = %s AND tc.is_selected = TRUE;
+
+You can pass the batch name as an environment variable:
+ENV=uat BATCH=SMOKE pytest
+
 

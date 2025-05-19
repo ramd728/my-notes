@@ -101,3 +101,20 @@ if store_as:
         context[f"{store_as}.{col}"] = str(val)
 
 
+if step_type == "api" and store_as:
+    if response_json and isinstance(response_json, dict):
+        def flatten_json(obj, prefix=""):
+            flat = {}
+            for k, v in obj.items():
+                key = f"{prefix}.{k}" if prefix else k
+                if isinstance(v, dict):
+                    flat.update(flatten_json(v, key))
+                else:
+                    flat[key] = str(v)
+            return flat
+
+        flattened = flatten_json(response_json)
+        for key, val in flattened.items():
+            context[f"{store_as}.{key}"] = val
+
+

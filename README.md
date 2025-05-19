@@ -137,6 +137,20 @@ JOIN test_case_batches cb ON tc.id = cb.test_case_id
 JOIN test_batches b ON cb.batch_id = b.id
 WHERE b.name = %s AND tc.is_selected = TRUE;
 
+-- Create a batch called 'SMOKE'
+INSERT INTO test_batches (name) VALUES ('SMOKE');
+
+-- Create another batch
+INSERT INTO test_batches (name) VALUES ('CRITICAL_REGRESSION');
+
+-- Map test cases to SMOKE batch
+INSERT INTO test_case_batches (test_case_id, batch_id) VALUES (101, 1);
+INSERT INTO test_case_batches (test_case_id, batch_id) VALUES (102, 1);
+
+-- Map test cases to CRITICAL_REGRESSION batch
+INSERT INTO test_case_batches (test_case_id, batch_id) VALUES (103, 2);
+
+
 You can pass the batch name as an environment variable:
 ENV=uat BATCH=SMOKE pytest
 

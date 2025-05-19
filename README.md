@@ -32,6 +32,8 @@ CREATE TABLE test_steps (
 );
 
 ALTER TABLE test_steps ADD COLUMN fetch_mode TEXT CHECK (fetch_mode IN ('one', 'all')) DEFAULT 'one';
+ALTER TABLE test_steps ADD COLUMN store_as TEXT;
+
 
 -- Test Results
 CREATE TABLE test_results (

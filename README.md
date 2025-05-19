@@ -117,4 +117,18 @@ if step_type == "api" and store_as:
         for key, val in flattened.items():
             context[f"{store_as}.{key}"] = val
 
+-- Test Batches (master table)
+CREATE TABLE test_batches (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Mapping Table: test_case_batches (many-to-many relationship)
+CREATE TABLE test_case_batches (
+    test_case_id INTEGER REFERENCES test_cases(id) ON DELETE CASCADE,
+    batch_id INTEGER REFERENCES test_batches(id) ON DELETE CASCADE,
+    PRIMARY KEY (test_case_id, batch_id)
+);
+
 

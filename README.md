@@ -187,7 +187,7 @@ Use a hybrid approach — inject references to modular Python logic when needed.
 
 Executive Summary: TestOs One-Pager
 
-Veritas is a scalable, hybrid automation framework designed to handle enterprise-level testing across UI, API, DB, and log layers. It uniquely combines a structured test design model (via PostgreSQL) with real-time business validation (via Oracle), enabling dynamic, data-driven execution.
+TestOs is a scalable, hybrid automation framework designed to handle enterprise-level testing across UI, API, DB, and log layers. It uniquely combines a structured test design model (via PostgreSQL) with real-time business validation (via Oracle), enabling dynamic, data-driven execution.
 
 🚀 Key Highlights:
 

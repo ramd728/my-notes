@@ -184,6 +184,37 @@ Yes at first — but vastly easier to scale and maintain long term.
 
 Use a hybrid approach — inject references to modular Python logic when needed.
 
+
+Executive Summary: TestOs One-Pager
+
+Veritas is a scalable, hybrid automation framework designed to handle enterprise-level testing across UI, API, DB, and log layers. It uniquely combines a structured test design model (via PostgreSQL) with real-time business validation (via Oracle), enabling dynamic, data-driven execution.
+
+🚀 Key Highlights:
+
+Modular Framework: Tests are composed of reusable, configurable steps stored in a DB.
+
+Hybrid Capabilities: Supports both DB-managed test execution and traditional file-based tests.
+
+Multi-Layer Validation: UI, API, DB, and ElasticSearch/Kibana log validations all in one flow.
+
+Agentic Test Flow: Dynamically reads test steps and context at runtime — no hardcoded logic.
+
+Autonomous Execution Engine: Dispatches steps based on type, stores results, and injects outputs.
+
+True Business State Validation: Oracle DB is directly queried to assert actual post-transaction outcomes.
+
+Full Traceability: Allure reports + PostgreSQL-based execution logs provide a detailed audit trail.
+
+🎯 Why TestOs?
+
+Avoids code duplication by managing test data and logic separately.
+
+Empowers QA/Dev/BA to collaborate on tests using structured inputs.
+
+Supports 1000+ test cases across multiple domains.
+
+Easily integrates into CI pipelines with batch or tag-based execution.
+
 “Will others be able to write test cases?”
 
 Absolutely. With a UI or admin form, anyone can define steps without touching Python code.

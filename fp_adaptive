@@ -25,3 +25,41 @@ Interpretation:
 A higher α reacts faster to behavior changes, reducing false positives sooner
 
 A lower α resists abrupt shifts, ensuring stability when anomalies are rare
+
+
+
+
+Great observation — let’s clarify why Score = 13 is marked as “Valid (Reclassified FP)” even when θ_new = 12.75 (i.e., 13 > θ_new):
+
+✅ What’s Actually Happening:
+The algorithm uses two mechanisms to determine whether to reclassify a previously flagged score like 13:
+
+1. Threshold (θ) Check:
+The initial classification is based on the threshold.
+
+If Score > θ, it's flagged as an anomaly.
+
+2. Confidence-Based Reclassification:
+Even if the score exceeds θ or θ_new, it can still be reclassified as valid if:
+
+Its deviation from the valid window mean (μ_V) is within the tolerance band:
+
+∣ai−μV∣≤τ⋅σ V
+​
+It consistently appears in the stream and builds up a high confidence score (C_j).
+
+💡 So, for ID 6, Score = 13:
+It was initially flagged because it exceeded θ = 15.
+
+Over time:
+
+Its confidence score increased as similar values like 13, 14, 15 continued to appear.
+
+It likely fell within the tolerance band as μ_V increased and σ_V adjusted.
+
+Thus, it was reclassified as valid, even though it’s slightly above the new θ = 12.75.
+
+🔁 Summary:
+Threshold (θ_new) helps prevent many false positives, but it is not the only factor.
+
+Confidence score and tolerance band proximity enable the model to reclassify values like 13 as valid — even if marginally over θ_new.

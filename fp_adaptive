@@ -1,0 +1,27 @@
+Learning Rate (α): Determines how quickly the threshold θ adapts over time.
+
+When is it used? During dynamic threshold adjustment:
+
+θ_new = (1 − α) × θ_old + α × (μ_FP + k × σ_FP)
+
+Where:
+
+μ_FP and σ_FP are the mean and standard deviation of scores reclassified as false positives
+
+k is a small constant (e.g., 1)
+
+Real-world Example:
+
+Initial threshold θ = 15
+
+After validating multiple 10-device orders, μ_FP = 10 and σ_FP = 0.5
+
+With α = 0.2, θ_new = (1 − 0.2) × 15 + 0.2 × (10 + 1 × 0.5) = 12.9
+
+With α = 0.5, θ_new = (1 − 0.5) × 15 + 0.5 × (10 + 0.5) = 12.75
+
+Interpretation:
+
+A higher α reacts faster to behavior changes, reducing false positives sooner
+
+A lower α resists abrupt shifts, ensuring stability when anomalies are rare
